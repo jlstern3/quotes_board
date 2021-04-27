@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Account</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div id="edit_account">
+        <div class="header">
+            <h3>Edit My Account</h3>
+            <a href="/quotes">Back</a>
+            <form action="/logout" method="POST">
+                {% csrf_token %}
+                <button type="submit" value="Logout">Logout</button>
+            </form>
+        </div>
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form action="/myaccount/{{current_user.id}}/update" method="POST">
+            {% csrf_token %}
+            <label>First Name:<input type="text" name="first_name" value="{{current_user.first_name}}"></label>
+            <label>Last Name:<input type="text" name="last_name" value="{{current_user.last_name}}"></label>
+            <label>Email: <input type="text" name="email" value="{{current_user.email}}"></label>
+            <button type="submit" value="Update">Update</button>
+        </form>
+    </div>
+</body>
+
+</html>

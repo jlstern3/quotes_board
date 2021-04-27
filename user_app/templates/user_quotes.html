@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Quotes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div id="user_posted_quotes">
+        <div class="header">
+            <h3>{{current_user.first_name}} {{current_user.last_name}} Quotes</h3>
+            <a href="/quotes">Go Back</a>
+            <form action="/logout" method="POST">
+                {% csrf_token %}
+                <button type="submit" value="Logout">Logout</button>
+            </form>
+        </div>
+        {% for one_quote in current_user.quotes_posted.all %}
+        <p>{{one_quote.author}}: "{{one_quote.content}}"</p>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

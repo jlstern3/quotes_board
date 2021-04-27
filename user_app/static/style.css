@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#registration, #login, #add_quote_form, #edit_account{
+    padding: 20px;
+}
+
+#registration h1, #login h1, #add_quote_form h3{
+    padding-bottom: 20px;
+    font-weight: none;
+}
+
+#registration label, #login label, #add_quote_form label, #edit_account label{
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+button{
+    box-shadow: 2px 3px black;
+    text-align: center;
+    padding: 2px 4px;
+    border: 1px solid black;
+}
+
+.header, .header h3, .header a, .header button{
+    height: auto;
+    display: inline-block;
+    margin: 10px;
+}
+
+
+#wrapper{
+    background-color: tan;
+    width: 800px;
+    height: 870px;
+}
+
+.quotes{
+    margin-left: 20px;
+}
+
+.quotes button{
+    margin: 5px;
+    display: inline-block;
+} 
+
+.quotes h3{
+    margin: 15px 0px;
+}
+
+#user_posted_quotes{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#user_posted_quotes p{
+    border: 2px solid black;
+    margin-bottom: 20px;
+    width: 200px;
+    height: auto;
+    padding: 8px;
+}
+.quotes{
+    border: 2px solid black;
+    margin-bottom: 20px;
+    width: 300px;
+    height: auto;
+    padding: 8px;
+}
+
+.quotes p{
+    margin-bottom: 5px;
+}
+hr{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: black;
+}
+
+.header{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+.header h3{
+    margin-right: 400px;
+}
+
+.title{
+    margin-left: 129px;
+    margin-bottom: 10px;
+    margin-top: -150px;
+}
+#add_quote_form{
+    margin-left: 607px;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div class="header">
+        <h3>Welcome, {{current_user.first_name}} {{current_user.last_name}}!</h3>
+        <a href="/myaccount/{{current_user.id}}/edit">Edit My Account</a>
+        <form action="/logout" method="POST">
+            {% csrf_token %}
+            <button type="submit" value="Logout">Logout</button>
+        </form>
+    </div>
+    <div id="add_quote_form">
+        <h3>Add a Quote!</h3>
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/users/add_quote" method="POST">
+            {% csrf_token %}
+            <label>Author:<input type="text" name="author"></label>
+            <label>Quote:<input type="text" name="quote"></label>
+            <button type="submit" value="Submit">Submit</button>
+        </form>
+    </div>
+    <h3 class="title">Quotes</h3>
+    <div class="quotes">
+        {% for one_quote in all_quotes %}
+        <p>{{one_quote.author}}: "{{one_quote.content}}"</p>
+
+        <p>Posted by <a href="/user/{{one_quote.posted_by.id}}">{{one_quote.posted_by.first_name}}
+                {{one_quote.posted_by.last_name}}</a></p>
+        <p>{{one_quote.users_that_liked.count}} people like this</p>
+        {% if current_user not in one_quote.users_that_liked.all %}
+        <form action="/quotes/like/{{one_quote.id}}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Like</button>
+        </form>
+        {% else %}
+        <form action="/quotes/unlike/{{one_quote.id}}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Unlike</button>
+        </form>
+        {% endif %}
+        {% if one_quote.posted_by.id == current_user.id %}
+        <form action="/quotes/delete/{{one_quote.id}}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+        </form>
+        {% endif %}
+        <hr>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
